@@ -1,15 +1,5 @@
 namespace KMZI_LAB_1
 {
-    public class Letter
-    {
-        public char letter { get; set; }
-        public int id { get; set; }
-        public Letter(char letter, int id)
-        {
-            this.letter = letter;
-            this.id = id;
-        }
-    }
     public partial class Form1 : Form
     {
         private Dictionary<char, int> Map = new Dictionary<char, int>();
@@ -29,6 +19,7 @@ namespace KMZI_LAB_1
         }
         public void GetMap(string text)
         {
+            Map.Clear();
             foreach(char letter in text)
             {
                 if (Map.ContainsKey(letter))
@@ -62,6 +53,7 @@ namespace KMZI_LAB_1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = null;
             encodingText = textBox1.Text;
             GetMap(encodingText);
         }
@@ -72,17 +64,16 @@ namespace KMZI_LAB_1
             char c = textBox4.Text[0];
             Change(c, id);
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            textBox3.Text = dataGridView1[1,e.RowIndex].Value.ToString();
-        }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             textBox3.TextAlign = HorizontalAlignment.Center;
             textBox4.TextAlign = HorizontalAlignment.Center;
             textBox3.Text = dataGridView1[0, e.RowIndex].Value.ToString();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            decodingText = textBox2.Text;
         }
     }
 }
